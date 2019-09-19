@@ -3,8 +3,8 @@ import Link from "next/link";
 
 const Postlink = props => (
   <li>
-    <Link href={`/post?title=${props.title}`}>
-      <a>{props.title}</a>
+    <Link href="/p/[id]" as={`/p/${props.id}`}>
+      <a>{props.id}</a>
     </Link>
   </li>
 );
@@ -13,9 +13,9 @@ export default function Blog() {
     <Layout>
       <h1>My Blog</h1>
       <ul>
-        <Postlink title="Hello Next.js" />
-        <Postlink title="Learn Next.js and that jazz" />
-        <Postlink title="Deploy apps and stuff like that" />
+        <Postlink id="Hello-Next.js" />
+        <Postlink id="Deploy apps and stuff like that" />
+        <Postlink id="Learn-Next.js" />
       </ul>
     </Layout>
   );
