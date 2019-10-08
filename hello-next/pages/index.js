@@ -2,37 +2,21 @@ import Layout from "../components/myLayout";
 import Link from "next/link";
 // import fetch from "isomorphic-unfetch";
 
-function getPosts(){
+function getPosts() {
   return [
-    { id: 'hello-nextjs', title: 'Hello Next.js' },
-    { id: 'learn-nextjs', title: 'Learn Next.js is awesome' },
-    { id: 'deploy-nextjs', title: 'Deploy apps with ZEIT' }
-  ]
+    { id: "hello-nextjs", title: "Hello Next.js" },
+    { id: "learn-nextjs", title: "Learn Next.js is awesome" },
+    { id: "deploy-nextjs", title: "Deploy apps with ZEIT" }
+  ];
 }
 
-export default function Blog() {
-  return(
-    <Layout>
-      <h1>My Blog</h1>
-      <ul>
-        {getPosts().map(post => (
-          <li key={post.id}>
-            <Link href="/p/[id]" as={`/p/${post.id}`}>
-              <a>{post.title}</a>
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <style jsx>{`
-        h1,
-        a {
-          font-family: 'Arial';
-        }
-
-        ul {
-          padding: 0;
-        }
-
+const PostLink = ({ post }) => (
+  <li>
+    <Link href="/p/[id]" as={`/p/${post.id}`}>
+      <a>{post.title}</a>
+    </Link>
+    <style jsx>
+      {`
         li {
           list-style: none;
           margin: 5px 0;
@@ -46,9 +30,32 @@ export default function Blog() {
         a:hover {
           opacity: 0.6;
         }
+      `}
+    </style>
+  </li>
+);
+
+export default function Blog() {
+  return (
+    <Layout>
+      <h1>My Blog</h1>
+      <ul>
+        {getPosts().map(post => (
+          <PostLink key={post.id} post={post} />
+        ))}
+      </ul>
+      <style jsx>{`
+        h1,
+        a {
+          font-family: "Arial";
+        }
+
+        ul {
+          padding: 0;
+        }
       `}</style>
     </Layout>
-  )
+  );
 }
 
 // const Index = props => (
